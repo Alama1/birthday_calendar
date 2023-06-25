@@ -1,12 +1,12 @@
 const {SlashCommandBuilder} = require("discord.js");
 
-class getAll {
+class allbirthdays {
     constructor() {
     }
 
     data = new SlashCommandBuilder()
-        .setName('getall')
+        .setName('allbirthdays')
         .setDescription('Показать всех именинников')
 }
 
-module.exports = getAll
+module.exports = allbirthdays

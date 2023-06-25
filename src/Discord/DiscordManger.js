@@ -43,7 +43,12 @@ class DiscordManger {
 
         const userIDs = Object.keys(birthdays)
         userIDs.forEach(userID => {
-            if (Date.now() + 3600 > birthdays[userID].timestamp) {
+            const user = birthdays[userID]
+            if (Date.now() > user.timestamp) {
+                this.app.config.properties.birthday[userID].timestamp = new Date(new Date().getFullYear() + 1, user.date.month, user.date.day).getTime()
+                fs.writeFileSync('./birthdays.json', JSON.stringify(this.app.config.properties.birthday), err => {
+                    console.log(err)
+                })
                 this.birthdayGreeting(userID)
             }
         })
@@ -52,10 +57,6 @@ class DiscordManger {
         const user = this.app.config.properties.birthday[userID]
         const channel = await this.client.channels.cache.get(this.app.config.properties.discord.channel)
         channel.send(`<@${userID}> ${user.text}`)
-        this.app.config.properties.birthday[userID].timestamp = new Date(new Date().getFullYear() + 1, user.date.month, user.date.day).getTime()
-        fs.writeFileSync('./config.json', JSON.stringify(this.app.config.properties), err => {
-            console.log(err)
-        })
     }
 }
 

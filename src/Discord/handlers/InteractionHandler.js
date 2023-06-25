@@ -48,7 +48,7 @@ class InteractionHandler {
             this.slashCommands.get(interaction.customId) :
             this.slashCommands.get(interaction.commandName)
         if (!command) return
-        interaction.deferReply({ephemeral: true})
+        await interaction.deferReply({ephemeral: true})
         command.onCommand(interaction)
     }
 }

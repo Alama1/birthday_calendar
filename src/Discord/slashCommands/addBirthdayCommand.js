@@ -10,7 +10,7 @@ class addBirthdayCommand {
     async onCommand(interaction) {
         const [userID, wishText, day, month, year] = this.getDataFromInteraction(interaction)
         let nextBirthdayTimestamp = this.getTimestampOfNextBirthday(day, month)
-        this.updateUserData(userID, wishText, day, month, year)
+        this.updateUserData(userID, wishText, day, month, year, nextBirthdayTimestamp)
 
         const returnEmbed = new EmbedBuilder()
         returnEmbed
@@ -44,9 +44,10 @@ class addBirthdayCommand {
     }
 
     updateUserData(userID, wishText, day, month, year, nextBirthdayTimestamp) {
+        console.log(nextBirthdayTimestamp)
         this.discord.app.config.properties.birthday[userID] = { text: wishText, date: { day: day, month: month, year: year }, timestamp: nextBirthdayTimestamp }
 
-        fs.writeFileSync('./config.json', JSON.stringify(this.discord.app.config.properties), err => {
+        fs.writeFileSync('./birthdays.json', JSON.stringify(this.discord.app.config.properties.birthday), err => {
             console.log(err)
         })
     }

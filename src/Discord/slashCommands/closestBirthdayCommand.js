@@ -25,8 +25,9 @@ class inactivityCheckCommand {
             .setTitle('Хоба!')
             .setDescription(`Ближайшая днюха у <@${human.id}>\nЧерез <t:${human.timestamp.toString().slice(0, -3)}:R>`)
             .setColor('#ed15ff')
-        interaction.reply({
-            embeds: [returnEmbed]
+        interaction.editReply({
+            embeds: [returnEmbed],
+            ephemeral: false
         })
     }
 }

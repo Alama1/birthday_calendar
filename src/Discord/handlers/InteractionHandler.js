@@ -9,6 +9,8 @@ class InteractionHandler {
 
     constructor(discord) {
         this.discord = discord
+
+        //Get all the slash commands to be registered and put them into an array
         this.slashCommandsRegister = []
         let slashCommandRegisterFiles = fs.readdirSync(path.resolve(__dirname, '../slashCommandsRegister'))
         for (const file of slashCommandRegisterFiles) {
@@ -16,6 +18,7 @@ class InteractionHandler {
             this.slashCommandsRegister.push(command.data)
         }
 
+       //Get all the slash commands to be executed
         this.slashCommands = new Collection()
         let slashCommandFiles = fs.readdirSync(path.resolve(__dirname, '../slashCommands'))
         for (const file of slashCommandFiles) {
@@ -23,6 +26,7 @@ class InteractionHandler {
             this.slashCommands.set(command.name, command)
         }
 
+        //Send registered commands to discord
         const rest = new REST({ version: '9' }).setToken(this.discord.app.config.properties.discord.token);
         (async () => {
             try {
@@ -40,17 +44,11 @@ class InteractionHandler {
     }
 
     async onInteraction(interaction) {
-
-
-        if (interaction.customId) {
-            const command = this.slashCommands.get(interaction.customId) ||
-                this.slashCommands.find(cmd => cmd.aliases && cmd.aliases.includes(interaction.customId))
-            if (!command) return
-            command.onCommand(interaction)
-            return
-        }
-        const command = this.slashCommands.get(interaction.commandName)
+        const command = interaction.customId ?
+            this.slashCommands.get(interaction.customId) :
+            this.slashCommands.get(interaction.commandName)
         if (!command) return
+        interaction.deferReply({ephemeral: true})
         command.onCommand(interaction)
     }
 }

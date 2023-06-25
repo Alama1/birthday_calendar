@@ -30,7 +30,7 @@ class addBirthdayCommand {
             .setDescription(`Added new birthday greeting for user <@${userID}>\nWith text <${wishText}>\nFor date <${day}-${parseInt(month) + 1}-${year}>\n
             And will be in <t:${timestamp.toString().slice(0, -3)}:R> days`)
             .setColor('#00c2ff')
-        interaction.reply({
+        interaction.editReply({
             embeds: [returnEmbed],
             ephemeral: true
         })

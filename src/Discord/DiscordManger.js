@@ -30,7 +30,7 @@ class DiscordManger {
         })
 
         this.client.login(this.app.config.properties.discord.token).catch(error => {
-            this.app.log.error(error)
+            console.error(error)
             process.exit(1)
         })
 

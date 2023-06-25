@@ -24,8 +24,9 @@ class getAllCommand {
             .setTitle('Все дни рождения:')
             .setColor('#00c2ff')
             .addFields(userArray)
-        interaction.reply({
-            embeds: [returnEmbed]
+        interaction.editReply({
+            embeds: [returnEmbed],
+            ephemeral: false
         })
     }
 }

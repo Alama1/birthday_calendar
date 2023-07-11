@@ -1,4 +1,5 @@
-const { EmbedBuilder } = require('discord.js')
+const {EmbedBuilder} = require('discord.js')
+
 class allbirthdaysCommand {
 
     constructor(discord) {
@@ -27,15 +28,30 @@ class allbirthdaysCommand {
             const username = await interaction.guild.members.fetch(userID)
             if (!username) return
             userArray.push(
-                {name: `${username.user.username}`,
-                 value: `Текст поздравления: **${birthdayUsers[userID].text}** \n 
-                Дата: **${birthdayUsers[userID].date.day}-${parseInt(birthdayUsers[userID].date.month) + 1}-${birthdayUsers[userID].date.year}**\n
+                {
+                    name: `${username.user.username}`,
+                    value: `Текст поздравления: **${birthdayUsers[userID].text}** \n 
+                Дата: **${birthdayUsers[userID].date.day}-${parseInt(birthdayUsers[userID].date.month) + 1}-${birthdayUsers[userID].date.year}**
+                Челу будет: ${this.calculateHowManyYearsOld(birthdayUsers[userID].date)}\n
                 Дата: <t:${birthdayUsers[userID].timestamp.toString().slice(0, -3)}:R>\n<--------------------->`,
-                time: birthdayUsers[userID].timestamp}
+                    time: birthdayUsers[userID].timestamp
+                }
             )
         }
         userArray.sort((a, b) => a.time - b.time)
         return userArray
+    }
+
+    calculateHowManyYearsOld(user) {
+        const currentMonth = new Date().getMonth()
+        const currentDay = new Date().getDate()
+        if (currentMonth < parseInt(user.month)) {
+            return new Date().getFullYear() - parseInt(user.year)
+        }
+        if (currentMonth === parseInt(user.month)) {
+            if (parseInt(user.day) > currentDay) return new Date().getFullYear() - parseInt(user.year)
+        }
+        return (new Date().getFullYear() - parseInt(user.year)) + 1
     }
 }
 

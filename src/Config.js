@@ -1,4 +1,5 @@
 const fs = require('fs')
+const path = require('path')
 
 require('dotenv').config()
 class Config {
@@ -19,9 +20,7 @@ class Config {
     }
 
     saveBirthdays() {
-        fs.writeFileSync('../birthdays.json', JSON.stringify(this.properties.birthday), err => {
-                    console.log(err)
-                })
+        fs.writeFileSync(path.resolve('./birthdays.json'), JSON.stringify(this.properties.birthday), {encoding: "utf-8"})
     }
 }
 

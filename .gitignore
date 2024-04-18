@@ -1,5 +1,5 @@
 .idea
 /node_modules
 .env
-birthdays.json
 .vscode
+birthdays.json

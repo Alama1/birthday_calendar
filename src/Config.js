@@ -19,7 +19,7 @@ class Config {
     }
 
     saveBirthdays() {
-        fs.writeFileSync('./birthdays.json', JSON.stringify(this.properties.birthday), err => {
+        fs.writeFileSync('../birthdays.json', JSON.stringify(this.properties.birthday), err => {
                     console.log(err)
                 })
     }

@@ -15,7 +15,7 @@ class Config {
     }
     constructor() {
         this.properties = require('../config.json')
-        this.properties.birthday = require('../birthdays.json')
+        this.properties.birthday = require('./birthdays.json')
         this.properties.discord.token = process.env.TOKEN
     }
 

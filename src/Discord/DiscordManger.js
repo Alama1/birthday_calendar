@@ -34,9 +34,6 @@ class DiscordManger {
             process.exit(1)
         })
 
-
-        this.checkForBirthday()
-        return
         schedule.scheduleJob('0 */12 * * *', () => { this.checkForBirthday() })
     }
 
@@ -50,9 +47,6 @@ class DiscordManger {
             if (Date.now() > user.timestamp) {
                 this.app.config.properties.birthday[userID].timestamp = new Date(new Date().getFullYear() + 1, user.date.month, user.date.day).getTime()
                 this.app.config.saveBirthdays()
-
-                console.log(userID)
-                return
                 this.birthdayGreeting(userID)
             }
         })

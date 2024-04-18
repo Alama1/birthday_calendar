@@ -20,7 +20,7 @@ class Config {
     }
 
     saveBirthdays() {
-        fs.writeFileSync(path.resolve(__dirname, '/birthdays.json'), JSON.stringify(this.properties.birthday), {encoding: "utf-8"})
+        fs.writeFileSync(path.resolve(__dirname + '/birthdays.json'), JSON.stringify(this.properties.birthday), {encoding: "utf-8"})
     }
 }
 

@@ -47,9 +47,7 @@ class addBirthdayCommand {
         console.log(nextBirthdayTimestamp)
         this.discord.app.config.properties.birthday[userID] = { text: wishText, date: { day: day, month: month, year: year }, timestamp: nextBirthdayTimestamp }
 
-        fs.writeFileSync('./birthdays.json', JSON.stringify(this.discord.app.config.properties.birthday), err => {
-            console.log(err)
-        })
+        this.discord.app.config.saveBirthdays()
     }
 }
 

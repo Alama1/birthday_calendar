@@ -20,8 +20,8 @@ class Config {
     }
 
     saveBirthdays() {
-        console.log(path.resolve(__dirname + '/birthdays.json'))
-        fs.writeFileSync(path.resolve(__dirname + '/birthdays.json'), JSON.stringify(this.properties.birthday), {encoding: "utf-8"})
+        console.log(path.resolve(__dirname, '../', '/birthdays.json'))
+        fs.writeFileSync(path.resolve(__dirname,'../' , '/birthdays.json'), JSON.stringify(this.properties.birthday), {encoding: "utf-8"})
     }
 }
 
